@@ -23,7 +23,7 @@
 				ball.y=canvas.height/2-200;
 				
 				var vy=0,		//初始速度
-					gravity=.2,	//重力加速度
+					gravity=.8,	//重力加速度
 					bounce=-.8;	//反弹系数
 					
 				//碰撞检测	
@@ -32,7 +32,7 @@
 						ball.y=canvas.height-ball.radius,
 						vy*=bounce		//速度反向并且减小
 					)
-					Math.abs(vy)<.2&&ball.y+ball.radius==canvas.height&&(ball.y=canvas.height/2-200,vy=0);
+					Math.abs(vy)<.8&&ball.y+ball.radius==canvas.height&&(ball.y=canvas.height/2-200,vy=0);
 				};
 				(function(){
 					requestAnimationFrame(arguments.callee,canvas);

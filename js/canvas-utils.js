@@ -62,7 +62,7 @@
 	//动画
 	w.requestAnimationFrame=w.requestAnimationFrame||w.webkitRequestAnimationFrame||w.mozRequestAnimationFrame||w.msRequestAnimationFrame||w.oRequestAnimationFrame||function(callback){return w.setTimeout(callback,1000/16)};
 	//取消动画
-	w.cancelAnimationFrame=w.cancelRequestAnimationFrame||w.webkitCancelAnimationFrame||w.webkitCancelRequestAnimationFrame||w.mozCancelAnimationFrame||w.mozCancelRequestAnimationFrame||w.msCancelAnimationFrame||w.msCancelRequestAnimationFrame||w.oCancelAnimationFrame||w.oCancelRequestAnimationFrame||w.clearTimeout;
+	w.cancelAnimationFrame=w.cancelAnimationFrame||w.cancelRequestAnimationFrame||w.webkitCancelAnimationFrame||w.webkitCancelRequestAnimationFrame||w.mozCancelAnimationFrame||w.mozCancelRequestAnimationFrame||w.msCancelAnimationFrame||w.msCancelRequestAnimationFrame||w.oCancelAnimationFrame||w.oCancelRequestAnimationFrame||w.clearTimeout;
 }(window,document)
 
 

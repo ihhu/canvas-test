@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>球超出边界重置位置</title>
+		<style>
+			*{margin:0;padding:0;}
+			p{
+	            position: absolute;
+	            top: 0; left: 520px;
+	            padding: 5px;
+	            width: 100px;
+	            background: #eee;  
+	            height:490px;
+	        }
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas" width="500" height="500" style="background:#0090d3">your browser not support canvas!</canvas>
+		<!--<p id="log"></p>-->
+		<script type="text/javascript" src="js/canvas-utils.js" ></script>
+		<script type="text/javascript" src="js/ball.js" ></script>
+		<script>
+			var canvas=document.querySelector("#canvas");
+			var context=canvas.getContext("2d");
+			
+			var balls=[];
+			var [numBall,canWid,canHei]=[50,canvas.width,canvas.height];
+			
+			for(let i=0;i<numBall;i++){
+				let [size,color]=[Math.random()*30+5,`#${("00000"+(Math.random()*0xffffff|0).toString(16)).substr(-6)}`]; //颜色and大小
+				let ball=new Ball(size,color);
+				
+				ball.id=`ball_${i}`;				//设置id
+				ball.radius=Math.random()*40+10;
+				ball.x=Math.random()*canWid;
+				ball.y=Math.random()*canHei;
+				ball.vx=Math.random()*2-1;
+				ball.vy=Math.random()*2-1;
+				
+				ball.draw(context);
+				
+				balls.push(ball);
+			}
+			
+			//draw
+			function draw(ball,pos){
+				//加上速度值
+				ball.x+=ball.vx;
+				ball.y+=ball.vy;
+				
+				if(ball.x-ball.radius>canvas.width||ball.radius+ball.x<0||ball.y+ball.radius<0||ball.y-ball.radius>canvas.height){
+					ball.radius=Math.random()*40+10;
+					ball.x=canvas.width/2;
+					ball.y=canvas.height+ball.radius;
+					ball.vx=Math.random()*2-1;
+					ball.vy=-Math.random()*2-1;
+				}
+				ball.draw(context);
+				
+			}
+			
+			
+			(function(){
+				draw.animation=requestAnimationFrame(arguments.callee,canvas);
+				context.clearRect(0,0,canvas.width,canvas.height);
+				
+				balls.forEach(draw);
+				
+			})();
+			
+			//console.log(balls)
+			
+		</script>
+	</body>
+</html>
