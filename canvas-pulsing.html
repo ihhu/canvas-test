@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Pulsing motion</title>
+	</head>
+	<body>
+		<canvas id="canvas" width="500" height="500" style="background:#0090D3">
+			your browser not support canvas!
+		</canvas>
+		<script type="text/javascript" src="js/canvas-utils.js" ></script>
+		<script type="text/javascript" src="js/ball.js" ></script>
+		<script type="text/javascript">
+			+function(){
+				var canvas=document.querySelector("#canvas"),
+					context=canvas.getContext("2d");
+				
+				var angle=0,
+					range=.5,
+					speed=.05,
+					centerScale=1;
+					
+				var ball=new Ball();
+				ball.x=canvas.width/2;
+				ball.y=canvas.height/2;
+				
+				(function drawFram(){
+					requestAnimationFrame(drawFram);
+					context.clearRect(0,0,canvas.width,canvas.height);
+					
+					ball.scaleX=ball.scaleY=centerScale+Math.sin(angle)*range;
+					
+					angle+=speed;
+					
+					ball.draw(context);
+				})();
+			}();
+		</script>
+	</body>
+</html>

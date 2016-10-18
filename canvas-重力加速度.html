@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>重力加速度</title>
+		<style>
+			*{padding:0;margin:0;}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas" width="500" height="500" style="background:#0090d3">
+			your browser not support canvas!
+		</canvas>
+		<script type="text/javascript" src="js/canvas-utils.js" ></script>
+		<script type="text/javascript" src="js/ball.js" ></script>
+		<script>
+			+function(){
+				var canvas=document.querySelector("#canvas"),
+					context=canvas.getContext("2d");
+				
+				var ball=new Ball(20);
+				ball.x=canvas.width/2;
+				ball.y=canvas.height/2-200;
+				
+				var vy=0,		//初始速度
+					gravity=.2,	//重力加速度
+					bounce=-.8;	//反弹系数
+					
+				//碰撞检测	
+				function checkGround(ball){
+					ball.y+ball.radius>canvas.height&&(
+						ball.y=canvas.height-ball.radius,
+						vy*=bounce		//速度反向并且减小
+					)
+					Math.abs(vy)<.2&&ball.y+ball.radius==canvas.height&&(ball.y=canvas.height/2-200,vy=0);
+				};
+				(function(){
+					requestAnimationFrame(arguments.callee,canvas);
+					context.clearRect(0,0,canvas.width,canvas.height);
+					
+					vy+=gravity;
+					ball.y+=vy;
+					//console.log(ball.y,":::",vy)
+					
+					
+					//碰撞检测
+					checkGround(ball);
+					ball.draw(context);
+				})();
+				
+				ball.draw(context);
+				
+			}();
+		</script>
+	</body>
+</html>

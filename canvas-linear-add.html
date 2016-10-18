@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>加速度</title>
+	</head>
+	<body>
+		<canvas id="canvas" width="500" height="500" style="background:#0090D3">
+			your browser not support canvas!
+		</canvas>
+		<script type="text/javascript" src="js/canvas-utils.js" ></script>
+		<script type="text/javascript" src="js/ball.js" ></script>
+		<script type="text/javascript">
+			+function(){
+				var canvas=document.querySelector("#canvas"),
+					context=canvas.getContext("2d");
+				
+								
+				var ball=new Ball();
+				ball.x=0;
+				ball.y=canvas.height/2;
+				
+				var vx=0,ax=.1;//定义初始速度vx,定义加速度a
+				
+				(function drawFram(){
+					requestAnimationFrame(drawFram);
+					context.clearRect(0,0,canvas.width,canvas.height);
+					
+					vx+=ax;//速度每一帧都加上速度的值
+					ball.x+=vx;	//水平，沿x轴方向运动
+					
+					(ball.x>canvas.width+ball.radius)&&(ball.x=-ball.radius,vx=0);
+					
+					//垂直运动
+					//ball.y=canvas.width/2+Math.sin(angle)*range;
+					//angle+=yspeed;
+					
+					ball.draw(context);
+				})();
+			}();
+		</script>
+	</body>
+</html>

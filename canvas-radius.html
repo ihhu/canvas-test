@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Radius motion</title>
+	</head>
+	<body>
+		<canvas id="canvas" width="500" height="500" style="background:#0090D3">
+			your browser not support canvas!
+		</canvas>
+		<script type="text/javascript" src="js/canvas-utils.js" ></script>
+		<script type="text/javascript" src="js/ball.js" ></script>
+		<script type="text/javascript">
+			+function(){
+				var canvas=document.querySelector("#canvas"),
+					context=canvas.getContext("2d")
+					
+				var ball=new Ball();
+				
+				var angle=0,
+					centerX=canvas.width/2,
+					centerY=canvas.height/2,
+					angle=0,
+					radiusX=100,
+					radiusY=50,
+					speed=.05;
+				
+				ball.x=centerX;
+				ball.y=centerY;
+				(function drawFram(){
+					requestAnimationFrame(drawFram);
+					context.clearRect(0,0,canvas.width,canvas.height);
+					
+					//当radius的值相等时为圆运动
+					//当radius的值不相等时为椭圆运动
+					ball.x=centerX+Math.sin(angle)*radiusX;
+					ball.y=centerY+Math.cos(angle)*radiusY;
+					
+					angle+=speed;
+					
+					ball.draw(context);
+				})();
+			}();
+		</script>
+	</body>
+</html>

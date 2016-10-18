@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Smooth motion</title>
+	</head>
+	<body>
+		<canvas id="canvas" width="500" height="500" style="background:#0090D3">
+			your browser not support canvas!
+		</canvas>
+		<script type="text/javascript" src="js/canvas-utils.js" ></script>
+		<script type="text/javascript" src="js/ball.js" ></script>
+		<script type="text/javascript">
+			+function(){
+				var canvas=document.querySelector("#canvas"),
+					context=canvas.getContext("2d"),
+					speed=0.05;
+					
+				var ball=new Ball();
+				ball.x=canvas.width/2;
+				ball.y=canvas.height/2;
+				
+				var angle=0,
+					range=100;
+				(function drawFram(){
+					requestAnimationFrame(drawFram);
+					context.clearRect(0,0,canvas.width,canvas.height);
+					
+					ball.x=canvas.width/2+Math.sin(angle)*range;//核心
+					//ball.y=canvas.width/2+Math.sin(angle)*range;
+					angle+=speed;
+					
+					ball.draw(context);
+				})();
+			}();
+		</script>
+	</body>
+</html>
